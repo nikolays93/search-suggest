@@ -26,7 +26,6 @@ function tax_suggestions_js(){
 	);  
 }
 
-
 add_action('wp_ajax_nopriv_my_action', 'suggest_dropdown');
 add_action('wp_ajax_get_tax_suggestions', 'suggest_dropdown');
 function suggest_dropdown() {
@@ -36,8 +35,9 @@ function suggest_dropdown() {
 	}
 
 	$terms = get_terms( array(
-		'taxonomy'=> 'product_cat',
-		//'hide_empty' => '0'
+		'taxonomy' => 'product_cat',
+		//'hide_empty' => '0',
+		'childless' => true,
 		) );
 
 	if( is_array($terms) && sizeof($terms) >= 1 ){
@@ -45,10 +45,16 @@ function suggest_dropdown() {
 			return preg_match( "/".sanitize_text_field( $_POST['search_val'] )."/ui", $var->name, $output);
 		});
 
+		$i = 0;
+		$max = 10;
 		foreach ($terms as $term) {
 			$link = get_term_link( $term->term_id, $term->taxonomy );
 
 			echo "<a href='{$link}'>{$term->name}</a>";
+			$i++;
+			
+			if($i >= $max)
+				break;
 		}
 	}
 
