@@ -35,8 +35,8 @@ jQuery(document).ready(function($) {
 			type: 'POST', url: tax_suggestions.url, data: ajaxdata,
 			success: function(response){
 				$(wrap_id).removeClass('ajax-load');
-				
-				if(response)
+
+				if(response && response != '0')
 					$(wrap_id).html('<div class="searchform-dropdown">'+response+'</div>');
 			}
 		}).fail(function() {
@@ -48,8 +48,6 @@ jQuery(document).ready(function($) {
 	// 	var $menuItem = $(this),
 	// 	$submenuWrapper = $('> .dropdown-wrapper', $menuItem);
 
-		
-		
 
 	// 	$submenuWrapper.css({
 	// 		top: menuItemPos.top,

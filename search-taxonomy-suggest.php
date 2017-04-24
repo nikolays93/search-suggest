@@ -18,15 +18,15 @@ define('SUGG_VER', '1.0');
 add_action( 'wp_enqueue_scripts', 'tax_suggestions_js', 99 );
 function tax_suggestions_js(){
 	wp_enqueue_script( 'search-taxonomy-suggest', plugins_url( basename(__DIR__) . '/suggests.js' ), array('jquery'), SUGG_VER, true );
-	wp_localize_script('search-taxonomy-suggest', 'tax_suggestions', 
+	wp_localize_script('search-taxonomy-suggest', 'tax_suggestions',
 		array(
 			'url' => admin_url('admin-ajax.php'),
 			'nonce' => wp_create_nonce( SUGG_NONCE )
 		)
-	);  
+	);
 }
 
-add_action('wp_ajax_nopriv_my_action', 'suggest_dropdown');
+add_action('wp_ajax_nopriv_get_tax_suggestions', 'suggest_dropdown');
 add_action('wp_ajax_get_tax_suggestions', 'suggest_dropdown');
 function suggest_dropdown() {
 	if( ! wp_verify_nonce( $_POST['nonce'], SUGG_NONCE ) ){
@@ -37,7 +37,7 @@ function suggest_dropdown() {
 	$terms = get_terms( array(
 		'taxonomy' => 'product_cat',
 		//'hide_empty' => '0',
-		'childless' => true,
+		// 'childless' => true,
 		) );
 
 	if( is_array($terms) && sizeof($terms) >= 1 ){
@@ -45,16 +45,16 @@ function suggest_dropdown() {
 			return preg_match( "/".sanitize_text_field( $_POST['search_val'] )."/ui", $var->name, $output);
 		});
 
-		$i = 0;
-		$max = 10;
+		// $i = 0;
+		// $max = 10;
 		foreach ($terms as $term) {
 			$link = get_term_link( $term->term_id, $term->taxonomy );
 
 			echo "<a href='{$link}'>{$term->name}</a>";
-			$i++;
-			
-			if($i >= $max)
-				break;
+			// $i++;
+
+			// if($i >= $max)
+			// 	break;
 		}
 	}
 
