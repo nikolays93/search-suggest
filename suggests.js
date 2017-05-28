@@ -15,9 +15,9 @@ jQuery(document).ready(function($) {
 	  clearTimeout(typingTimer);
 	  $(wrap_id).addClass('ajax-load');
 
-	  if($search_input.val().length >= 3){
+	  if($search_input.val().length >= 2){
 	  	typingTimer = setTimeout(doneTyping, doneTypingInterval);
-	  }else{
+	  } else {
 	  	$(wrap_id).removeClass('ajax-load');
 	  	$(wrap_id).html('');
 	  }
@@ -28,9 +28,12 @@ jQuery(document).ready(function($) {
 		var ajaxdata = {
 			action: 'get_tax_suggestions',
 			nonce: tax_suggestions.nonce,
-			search_val: $search_input.val()
 		};
+		var search_val = $search_input.val();
 
+		var del = search_val.length >= 5 ? 2 : 1;
+		ajaxdata.search_val = search_val.substr( 0, search_val.length - del );
+		
 		$.ajax({
 			type: 'POST', url: tax_suggestions.url, data: ajaxdata,
 			success: function(response){
@@ -40,20 +43,9 @@ jQuery(document).ready(function($) {
 					$(wrap_id).html('<div class="searchform-dropdown">'+response+'</div>');
 			}
 		}).fail(function() {
-			console.log('Ajax error!');
+			console.log('Ajax error');
 		});
 	}
-
-	// $('#dropdown-search').on('mouseover', function() {
-	// 	var $menuItem = $(this),
-	// 	$submenuWrapper = $('> .dropdown-wrapper', $menuItem);
-
-
-	// 	$submenuWrapper.css({
-	// 		top: menuItemPos.top,
-	// 		left: menuItemPos.left + Math.round($menuItem.outerWidth() * 0.75)
-	// 	});
-	// });
 });
 
 
