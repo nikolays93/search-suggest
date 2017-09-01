@@ -9,15 +9,13 @@
 // use #searchform
 // #searchform-dropdown-wrap > .searchform-dropdown
 jQuery(document).ready(function($) {
-
-
-	var suggestions = function( search_form_query ){
+	var suggestions = function( search_form_id ){
 		var self = this;
 		this.typingTimer = null;
 		this.interval = 500;
 		this.loadClass = 'ajax-load';
 
-		var $search_form = $(search_form_query);
+		var $search_form = $(search_form_id);
 		var $search_input = $('[name="s"]', $search_form);
 		var $suggWarp = $("<div id='searchform-dropdown' class='not-initialized'></div>");
 
@@ -35,6 +33,10 @@ jQuery(document).ready(function($) {
 			}
 		});
 		$search_input.on('keydown', function () { clearTimeout(self.typingTimer); });
+		$(document).on('click', function(event) {
+			if( $(event.target).closest( search_form_id ).length <= 0 )
+				$suggWarp.addClass('not-initialized');
+		});
 
 		function doneTyping () {
 			$suggWarp.removeClass('not-initialized');
