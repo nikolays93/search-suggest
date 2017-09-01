@@ -45,6 +45,7 @@ form#searchform #searchform-dropdown ul.search-dropdown > li a img {
 	width: auto;
 	vertical-align: top;
 	margin-right: 15px;
+	margin-bottom: 10px;
 	float: left;
 }
 form#searchform #searchform-dropdown ul.search-dropdown > li a h4 {}
