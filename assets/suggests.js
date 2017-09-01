@@ -19,7 +19,7 @@ jQuery(document).ready(function($) {
 
 		var $search_form = $(search_form_query);
 		var $search_input = $('[name="s"]', $search_form);
-		var $suggWarp = $("<div id='searchform-dropdown'></div>");
+		var $suggWarp = $("<div id='searchform-dropdown' class='not-initialized'></div>");
 
 		$search_form.append( $suggWarp );
 		$search_input.attr('autocomplete', 'off');
@@ -37,6 +37,7 @@ jQuery(document).ready(function($) {
 		$search_input.on('keydown', function () { clearTimeout(self.typingTimer); });
 
 		function doneTyping () {
+			$suggWarp.removeClass('not-initialized');
 			var search_val = $search_input.val();
 			arrSuggProps.search_val = search_val.substr( 0, search_val.length - ((search_val.length >= 5) ? 2 : 1) );
 
@@ -47,11 +48,12 @@ jQuery(document).ready(function($) {
 				success: function(response){
 					$suggWarp.removeClass(self.loadClass);
 
+					console.log(response);
 					if(response && response != '0')
 						$suggWarp.html('<ul class="search-dropdown">'+response+'</ul>');
 				}
 			}).fail(function() {
-				console.log('Ajax error');
+				console.log('AJAX Fatal error!');
 			});
 		}
 	}

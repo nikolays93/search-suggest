@@ -1,0 +1,51 @@
+form#searchform { position: relative; }
+form#searchform #searchform-dropdown {
+	display: block;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	background: #fff;
+}
+form#searchform #searchform-dropdown.not-initialized {
+	display: none;
+}
+form#searchform #searchform-dropdown.ajax-load {
+	opacity: 0.75;
+	background: #fff;
+	min-height: 94px;
+}
+form#searchform #searchform-dropdown ul.search-dropdown {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+form#searchform #searchform-dropdown ul.search-dropdown > li {}
+form#searchform #searchform-dropdown ul.search-dropdown > li a {
+	overflow: hidden;
+	display: block;
+	padding: 6px 8px;
+	border-bottom: 1px solid #ccc;
+
+	font-size: 14px;
+	text-decoration: none;
+	color: #000;
+	background: #fff;
+}
+form#searchform #searchform-dropdown ul.search-dropdown > li a:hover,
+form#searchform #searchform-dropdown ul.search-dropdown > li a:focus {
+	text-decoration: none;
+	color: #000;
+	background: #ddd;
+}
+form#searchform #searchform-dropdown ul.search-dropdown > li a img {
+	max-height: 80px;
+	width: auto;
+	vertical-align: top;
+	margin-right: 15px;
+	float: left;
+}
+form#searchform #searchform-dropdown ul.search-dropdown > li a h4 {}
+form#searchform #searchform-dropdown ul.search-dropdown > li a span {}
