@@ -41,8 +41,10 @@ form#searchform #searchform-dropdown ul.search-dropdown > li a:focus {
 	background: #ddd;
 }
 form#searchform #searchform-dropdown ul.search-dropdown > li a img {
+	max-width: 100%;
 	max-height: 80px;
 	width: auto;
+	height: auto;
 	vertical-align: top;
 	margin-right: 15px;
 	margin-bottom: 10px;
